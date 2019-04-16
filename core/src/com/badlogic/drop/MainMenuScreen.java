@@ -12,11 +12,9 @@ public class MainMenuScreen implements Screen {
     private final Drop game;
     private Sprite startButtonSprite;
     private Sprite exitButtonSprite;
-    private Sprite pointSprite;
     private OrthographicCamera camera;
     private Texture startButtonTexture;
     private Texture exitButtonTexture;
-    private Texture pointTexture;
     private Vector3 vectorTouch = new Vector3(); // временный вектор для "захвата" входных координат
 
     public MainMenuScreen(Drop game) {
@@ -24,18 +22,16 @@ public class MainMenuScreen implements Screen {
         float height = Gdx.graphics.getHeight();
         float width = Gdx.graphics.getWidth();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, width, height);
         startButtonTexture = new Texture(Gdx.files.internal("start.jpeg"));
         exitButtonTexture = new Texture(Gdx.files.internal("exit.png"));
-        pointTexture = new Texture(Gdx.files.internal("point.jpg"));
 
         startButtonSprite = new Sprite(startButtonTexture);
         exitButtonSprite = new Sprite(exitButtonTexture);
-        pointSprite = new Sprite(pointTexture);
         // устанавливаем размер и позиции
-        startButtonSprite.setSize(236, 75);
-        exitButtonSprite.setSize(244, 65);
-        pointSprite.setSize(30, 30);
+        startButtonSprite.setSize(startButtonSprite.getWidth(), startButtonSprite.getHeight());
+
+        exitButtonSprite.setSize(exitButtonSprite.getWidth(), exitButtonSprite.getHeight());
 
         exitButtonSprite.setX(100);
         exitButtonSprite.setY(100);
@@ -59,7 +55,6 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
         game.batch.draw(startButtonTexture, 100, 200);
         game.batch.draw(exitButtonTexture, 100, 100);
-        game.batch.draw(pointTexture, 200, 400);
         game.batch.end();
 
         handleTouch();
